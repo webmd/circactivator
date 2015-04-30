@@ -1,0 +1,126 @@
+{
+  "_created": 1421167755,
+  "status": "active",
+  "target": "1.2.3.4",
+  "_checks": [
+    "/check/124"
+  ],
+  "timeout": 10,
+  "metrics": [
+    {
+      "status": "available",
+      "name": "vserver1:80`actsvcs",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`curclntconnections",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`cursrvrconnections",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`inactsvcs",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`totalrequestbytes",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`totalrequests",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`totalresponsebytes",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`totalresponses",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`tothits",
+      "type": "numeric"
+    },
+    {
+      "status": "available",
+      "name": "vserver1:80`vslbhealth",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`actsvcs",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`curclntconnections",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`cursrvrconnections",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`inactsvcs",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`totalrequestbytes",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`totalrequests",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`totalresponsebytes",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`totalresponses",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`tothits",
+      "type": "numeric"
+    },
+    {
+      "status": "active",
+      "name": "vserver2:80`vslbhealth",
+      "type": "numeric"
+    }
+  ],
+  "_last_modified": 1429111510,
+  "brokers": [
+    "/broker/5"
+  ],
+  "_last_modified_by": "/user/10",
+  "period": 60,
+  "_cid": "/check_bundle/123",
+  "display_name": "Netscaler - LB Vservers",
+  "tags": [],
+  "notes": null,
+  "config": {
+    "url": "http://some.url.here.com",
+    "port": "80"
+  },
+  "type": "json"
+}
