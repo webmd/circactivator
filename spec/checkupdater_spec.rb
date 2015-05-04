@@ -124,15 +124,5 @@ describe CircActivator::CheckUpdater do
       expect(@checkupdater).to_not receive(:update)
       @checkupdater.run
     end
-
-    it "#run does not debug log if logging is disabled (disabled by default)" do
-      expect(CircActivator::Log).to_not receive(:debug)
-      @checkupdater.run
-    end
-
-    it '#run debug logs when logging is enabled' do
-      expect(CircActivator::Log).to receive(:debug).exactly(3).times
-      @checkupdater.run(logging=true)
-    end
   end
 end

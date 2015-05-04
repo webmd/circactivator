@@ -85,7 +85,7 @@ module CircActivator
     def run(logging=false)
       fetch
       updated_metrics = activate_metrics
-      update
+      update if updated_metrics.length > 0
       
       updated_metrics
     end
