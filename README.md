@@ -53,6 +53,8 @@ circonus:
     base_url: https://api.circonus.com/v2
     api_key: your-api-key-here
     api_app_name: circactivator
+    verify: false
+    attempts: 3
 
 monitoring:
     error_file: /path/to/log/file/circactivator.err
@@ -72,7 +74,7 @@ The `log` section of the config sets up the log file CircActivator uses to log i
 
 ### Circonus
 
-The `circonus` section of the config specifies which Circonus instance to use (which is especially useful if you are a Circonus Inside customer) and your API key and app name.  See https://login.circonus.com/resources/api#authentication for more information.
+The `circonus` section of the config specifies which Circonus instance to use (which is especially useful if you are a Circonus Inside customer) and your API key and app name.  See https://login.circonus.com/resources/api#authentication for more information.  Additionally, you may disable SSL validation with the `verify: false` config item (in the event you're running a Circonus Inside system using an untrusted CA), and how many times CircActivator will try an API call upon failure or timeout (defaults to 3).
 
 ### Monitoring
 

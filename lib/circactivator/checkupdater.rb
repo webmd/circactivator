@@ -44,9 +44,31 @@ module CircActivator
     end
 
     def fetch
-      response = HTTParty.get(url + '?query_broker=1', headers: http_headers, verify: false)
-      raise_exceptions!(response)
+      response = call_circonus(:get, url + '?query_broker=1')
       @check_bundle = JSON.load(response.body)
+    end
+
+    def update
+      response = call_circonus(:put, url, body: payload_hash.to_json)
+    end
+
+    def call_circonus(method, url, options={})
+      options[:headers] = http_headers
+      options[:verify]  = CircActivator::Config.circonus['verify'] || true
+
+      attempt = 0
+      begin
+        attempt += 1
+        response = HTTParty.send(method, url, options)
+        raise_exceptions!(response)
+      rescue Net::OpenTimeout, Net::ReadTimeout, CircActivator::Exception::CirconusError
+        raise if attempt >= attempts
+        retry
+      rescue CircActivator::Exception::CheckNotFound
+        raise
+      end
+
+      response
     end
 
     def activate_metrics
@@ -63,11 +85,6 @@ module CircActivator
 
     def payload_hash
       @check_bundle.select { |k,v| k =~ /brokers|config|display_name|metrics|notes|period|status|tags|target|timeout|type/ }
-    end
-
-    def update
-      response = HTTParty.put(url, headers: http_headers, body: payload_hash.to_json, verify: false)
-      raise_exceptions!(response)
     end
 
     def raise_exceptions!(response)
@@ -88,6 +105,12 @@ module CircActivator
       update if updated_metrics.length > 0
       
       updated_metrics
+    end
+
+    private
+
+    def attempts
+      CircActivator::Config.circonus['attempts'] || 3
     end
   end
 end
