@@ -54,7 +54,7 @@ module CircActivator
 
     def call_circonus(method, url, options={})
       options[:headers] = http_headers
-      options[:verify]  = CircActivator::Config.circonus['verify'] || true
+      options[:verify]  = CircActivator::Config.circonus.fetch('verify', true)
 
       attempt = 0
       begin
