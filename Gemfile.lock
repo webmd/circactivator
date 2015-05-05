@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    circactivator (2.0.1)
+    circactivator (2.1.0)
       httparty (~> 0.13.3)
       mixlib-log (~> 1.6.0)
       settingslogic (~> 2.0.9)
