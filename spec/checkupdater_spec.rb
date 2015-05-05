@@ -124,5 +124,25 @@ describe CircActivator::CheckUpdater do
       expect(@checkupdater).to_not receive(:update)
       @checkupdater.run
     end
+
+    it 'retries the HTTP call in the event of a server failure' do
+      bad_response  = double('bad_response', code: 500, body: 'server error')
+      good_response = double('good_response', code: 200, body: 'check data')
+
+      expect(HTTParty).to receive(:get).twice.and_return(bad_response, good_response)
+      @checkupdater.call_circonus(:get, '/test-url')
+    end
+
+    it 'raises an error after attempts exceeded' do
+      response = double('response', code: 500, body: 'server error')
+      expect(HTTParty).to receive(:get).exactly(3).times.and_return(response)
+      expect { @checkupdater.call_circonus(:get, '/test-url') }.to raise_error(CircActivator::Exception::CirconusError)
+    end
+
+    it 'does not retry on a 404' do
+      response = double('response', code: 404)
+      expect(HTTParty).to receive(:get).once.and_return(response)
+      expect { @checkupdater.call_circonus(:get, '/test-url') }.to raise_error(CircActivator::Exception::CheckNotFound)
+    end
   end
 end

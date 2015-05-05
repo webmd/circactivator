@@ -1,5 +1,5 @@
 log:
-    file: /Users/adam/tmp/circactivator.log
+    file: log/circactivator.log
     level: debug
     count: 7
 
@@ -7,9 +7,11 @@ circonus:
     base_url: https://api.circonus.com/v2
     api_key: a12345
     api_app_name: my_app
+    verify: false
+    attempts: 3
 
 monitoring:
-    error_file: /Users/adam/tmp/circactivator.err
+    error_file: log/circactivator.err
 
 check_bundles:
     iad1-prod:
